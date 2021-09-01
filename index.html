@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather Forecast</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" href="./assets/style.css">
+    </head>
+
+    <body>
+
+        <div id="parent" class="mt-4">
+            <div id="child__1">
+                <div id="child1__subclass1">
+                    <div>
+                        Tuesday
+                    </div>
+                    <div>
+                        <span class="big-font">2</span><span>nd</span>
+                    </div>
+                    <div>
+                        July, 2020
+                    </div>
+                </div>
+                <div id="child1__subclass2">
+                    Weather Forecast
+                </div>
+                <div id="child1__subclass3">
+                    <img src="./assets/img/sun.png" alt="sun.png" id="imgid">
+                </div>
+            </div>
+            <hr>
+            <div id="child__2">
+                <div class="child2__subclass2">
+                    <div class="common-colortext text-center">Summary</div>
+                    <div class="font-inc text-center"><span id="tempunit">25</span><sup>0</sup></div>
+                    <div class="common-colortext text-center" id="weatherstat">Clear</div>
+                </div>
+                <div class="child2__subclass2">
+                    <div class="common-colortext text-center">Daylight</div>
+                    <div class="font-inc text-center">18:32</div>
+                    <div class="common-colortext text-center">Clear</div>
+                </div>
+                <div class="child2__subclass2">
+                    <div class="common-colortext text-center">Wind</div>
+                    <div class="font-inc text-center">9<sub>mph</sub></div>
+                    <div class="common-colortext text-center">from sw</div>
+                </div>
+                <div class="child2__subclass2">
+                    <div class="common-colortext text-center">Gusts</div>
+                    <div class="font-inc text-center">9<sub>mph</sub></div>
+                    <div class="common-colortext text-tranform-capitalize text-danger text-capitalize text-center">high variance
+                    </div>
+                </div>
+                <div class="child2__subclass2">
+                    <div class="common-colortext text-center">Visibility</div>
+                    <div class="font-inc text-center">7.6<sub>m</sub></div>
+                    <div class="common-colortext text-center">Clear</div>
+                </div>
+                <div class="child2__subclass2">
+                    <div class="common-colortext text-center">Humidity</div>
+                    <div class="font-inc text-center">69<sub>%</sub></div>
+                    <div class="common-colortext  text-tranform-capitalize text-warning text-capitalize text-center">Moderate</div>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+            crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    url: 'https://api.openweathermap.org/data/2.5/weather?q=Kolkata&appid=07ce9ad23b015bddf70814af3b7d3a7c&units=metric',
+                    type: "get",
+                    dataType: 'json',
+                    success: function (result) {
+                        var iconcode = result.weather[0].icon;
+                        var paramweathertype = result.weather[0].main;
+                        var tempunit = Math.floor(result.main.temp);
+                        var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+                        $('#imgid').attr('src', iconurl);
+                        $('#weatherstat').text(paramweathertype);
+                        $('#tempunit').text(tempunit);
+
+                    }
+                });
+            });
+        </script>
+    </body>
+
+</html>
